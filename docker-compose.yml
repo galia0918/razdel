@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  api:
+    image: kasymova/razdel-api
+    ports:
+      - "9000:8000"
+    restart: unless-stopped
+
+  ui:
+    image: kasymova/razdel-ui
+    environment:
+      - VUE_APP_API_HOST=http://localhost:9000
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: unless-stopped
